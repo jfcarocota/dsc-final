@@ -20,6 +20,9 @@ SolveSpression(std::string &data, int i)
         std::cout << "\nCadena no valida" << std::endl;
     }
 
+    //data.erase(remove(data.begin(), data.end(), '('), data.end());
+    //data.erase(remove(data.begin(), data.end(), ')'), data.end());
+
     while(i < data.size())
     {
         i++;
@@ -83,7 +86,15 @@ SolveSpression(std::string &data, int i)
                         {
                             if(data[j] == data[k] && j != k)
                             {
-                                data[k] = ' ';
+                                continue;
+                            }
+                            else if(data[j] != data[k])
+                            {
+                                if(k + 1 == '}' )
+                                {
+                                    data[j] = ' ';
+                                    continue;
+                                }
                             }
                         }
                     }
@@ -131,6 +142,8 @@ SolveSpression(std::string &data, int i)
                             if(data[j] == data[k] && j != k)
                             {
                                 data[k] = ' ';
+                                //j++-;
+                                //continue;
                             }
                         }
                     }
@@ -140,6 +153,13 @@ SolveSpression(std::string &data, int i)
                 SolveSpression(data, 0);
             }
             break;
+            case ',':
+                if(next == ',')
+                {
+                    data[i] = ' ';
+                    data.erase(remove(data.begin(), data.end(), ' '), data.end());
+                }
+                break;
         default:
             break;
         }
